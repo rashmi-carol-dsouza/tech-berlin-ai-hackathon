@@ -18,7 +18,11 @@ function getContentEntityByType(contentEntity: any) {
     }
 }
 
-function ContentEntityList({ entities }: any) {
+function ContentEntityList({ entities, isLoading }: any) {
+    if(isLoading) {
+        return <p>Loading...</p>
+    }
+
     return (
         <ul>{entities.map((contentEntity: any) => {
             return (

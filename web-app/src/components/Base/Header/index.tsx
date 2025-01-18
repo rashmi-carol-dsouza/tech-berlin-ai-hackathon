@@ -1,15 +1,24 @@
 import Container from '../Container';
 import { useRefContext } from '../../../context/Ref';
 import { useLocation } from '../../../context/Location';
+import { useViewContext } from '../../../context/View';
 
 function Header() {
     const { inputRef } = useRefContext();
     const { getCoordinates } = useLocation();
+    const { setViewState } = useViewContext();
+    
     const handleFocusInput = () => {
         inputRef?.current?.focus();
     };
 
+    const handleAskQuestionClick = () => {
+        setViewState('askQuestion');
+        handleFocusInput();
+    };
+
     const handleFindNearbyClick = () => {
+        setViewState('findNearby');
         getCoordinates();
     };
 
@@ -37,7 +46,7 @@ function Header() {
                         <button
                             className="inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                             type="button"
-                            onClick={handleFocusInput}
+                            onClick={handleAskQuestionClick}
                         >
                             Ask a question
                         </button>
