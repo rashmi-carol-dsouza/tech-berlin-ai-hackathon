@@ -24,7 +24,8 @@ class LMNTtts:
             text (str): The text to synthesize.
         """
         async with Speech(self.api_key) as speech:
-            synthesis = await speech.synthesize(text, self.voice_id, model=self.model)
+            synthesis = await speech.synthesize(text, voice='lily', format='mp3')
+            # synthesis = await speech.synthesize(text, self.voice_id, model=self.model)
         
         with open(self.output_file, 'wb') as f:
             f.write(synthesis['audio'])
