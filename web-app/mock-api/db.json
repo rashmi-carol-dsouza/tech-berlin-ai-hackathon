@@ -1,0 +1,54 @@
+{
+    "relevant-entities": [
+        {
+            "messages": [
+                {
+                    "id": "m1234",
+                    "text": "Welcome to Berlin! I'm your guide, and I'm here to help you explore the city. What would you like to do today?"
+                }
+            ],
+            "audio": [
+                "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            ],
+            "entities": [
+                {
+                    "id": "s1234",
+                    "type": "collection",
+                    "theme": "quaint_stores",
+                    "title": "Cute Shopping",
+                    "description": "Cute mom and pop stores around you",
+                    "entities": [
+                        {
+                            "id": "store-1245",
+                            "type": "shop",
+                            "title": "Kado - Liquorice Boutique",
+                            "description": "Something nice about liquorice and this store"
+                        }
+                    ]
+                },
+                {
+                    "id": "f1234",
+                    "type": "text",
+                    "theme": "history",
+                    "title": "The Legacy of Albrecht Thaer in Friedrichshain",
+                    "description": "Strolling through Thaerstraße in Friedrichshain, Berlin, you'll encounter a name steeped in agricultural history—Albrecht Thaer, the 'father of scientific agriculture.' Thaer's revolutionary work in soil fertility and crop rotation transformed farming into a precise science, ensuring food security for generations. His dedication to blending theory with practice is a reminder of how one man's vision can sow the seeds of progress. Explore the street that celebrates his enduring legacy in the heart of Berlin."
+                },
+                {
+                    "id": "s1234",
+                    "type": "collection",
+                    "theme": "discover_cuisine",
+                    "title": "Want to Try a different cuisine?",
+                    "description": "Some of the restaurants that are very different from what you find typically in your neighbourhood",
+                    "entities": [
+                        {
+                            "id": "store-1245",
+                            "type": "restaurant",
+                            "title": "Thänh Koch",
+                            "description": "Specialises in Hanoian cuisine"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
