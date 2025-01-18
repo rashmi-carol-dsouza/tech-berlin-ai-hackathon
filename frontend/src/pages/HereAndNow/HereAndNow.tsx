@@ -1,53 +1,37 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getRelevantContentEntities } from "../../api/relevantContentEntities";
+import PromptBox from "../../components/PromptBox";
+import Messages from "../../components/Messages";
+import { useLocation } from "../../context/Location";
+import LocationView from "./LocationView";
 
-type HereAndNowProps = {
-    lat: number;
-    long: number;
-}
+function HereAndNow() {
+    const { coordinates } = useLocation();
+    const [queryInput, setQueryInput] = useState<string | undefined>(undefined);
 
-function getContentEntityByType(contentEntity: any) {
-    switch (contentEntity.type) {
-        case 'collection':
-            return <CollectionEntity data={contentEntity} />
-        case 'fun_fact':
-            return <FunFactEntity data={contentEntity} />
-        case 'shop':
-            return <ShopEntity data={contentEntity} />
-        case 'restaurant':
-            return <RestaurantEntity data={contentEntity} />
-        default:
-            return null
-    }
-}
-
-function ContentEntityList({ entities }: any) {
-    return (
-        <ul>{entities.map((contentEntity: any) => {
-            return (
-                <li key={contentEntity.id}>
-                    {getContentEntityByType(contentEntity)}
-                </li>
-            )
-        })}</ul>
-    )
-}
-
-function HereAndNow({ lat, long }: HereAndNowProps) {
-    const { isPending, isError, data, error } = useQuery({ queryKey: ['contentEntities'], queryFn: () => getRelevantContentEntities(lat, long) });
-    if (isPending) {
-        return <span>Loading...</span>
-    }
-
-    if (isError) {
-        return <span>Error: {error.message}</span>
-    }
+    const { data, isError, isLoading, error } = useQuery({
+        queryKey: ['contentEntities', queryInput],
+        queryFn: () => getRelevantContentEntities(coordinates.lat, coordinates.long, queryInput),
+        enabled: queryInput !== null,
+    });
 
     return (
         <div>
-            <ContentEntityList entities={data.entities} />
+            <LocationView coordinates={coordinates} />
+            <Messages
+                messages={data?.messages || []}
+                isLoading={isLoading}
+                isError={isError}
+                error={error}
+                queryInput={queryInput}
+            />
+            <PromptBox
+                onSubmit={(inputValue: string) => setQueryInput(inputValue)}
+                isLoading={isLoading}
+            />
         </div>
-    )
+    );
 }
 
 export default HereAndNow;

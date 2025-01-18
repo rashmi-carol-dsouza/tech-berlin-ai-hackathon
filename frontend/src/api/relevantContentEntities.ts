@@ -1,6 +1,8 @@
 
-export async function getRelevantContentEntities(lat: number, long: number) {
-    const response = await fetch("https://mocki.io/v1/45946f55-1ff9-4742-8da1-ebcc286686bb?lat=" + lat + "&long=" + long);
+const API_ENDPOINT = "http://localhost:4000/relevant-entities";
+
+export async function getRelevantContentEntities(lat: number, long: number, query?: string) {
+    const response = await fetch(`${API_ENDPOINT}?lat=${lat}&long=${long}&query=${query}`);
     const data = await response.json();
-    return data;
+    return data[0];
 }
