@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getRelevantContentEntities } from "../../api/relevantContentEntities";
 import PromptBox from "../../components/PromptBox";
-import Messages from "../../components/Messages";
+import Messages, { Message } from "../../components/Messages";
 import { useLocation } from "../../context/Location";
 import LocationView from "./LocationView";
 
 function HereAndNow() {
     const { coordinates } = useLocation();
     const [queryInput, setQueryInput] = useState<string | undefined>(undefined);
-    const [messages, setMessages] = useState<{ id: number; text: string }[]>([]);
+    const [messages, setMessages] = useState<Message[]>([]);
 
     const { data, isError, isLoading, error } = useQuery({
         queryKey: ['contentEntities', queryInput],
@@ -19,7 +19,12 @@ function HereAndNow() {
 
     useEffect(() => {
         if (data?.messages) {
-            setMessages((prevMessages) => [...prevMessages, ...data.messages]);
+            const newMessages = data.messages.map((message: any, index: number) => ({
+                id: message.id || index,
+                text: message.text,
+                audio: data.audio && data.audio[index], // Associate audio if available
+            }));
+            setMessages((prevMessages) => [...prevMessages, ...newMessages]);
         }
     }, [data]);
 
