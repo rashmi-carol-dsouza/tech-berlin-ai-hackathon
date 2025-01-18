@@ -2,7 +2,7 @@ import { getContentEntityByType } from "../../ContentList";
 
 function CollectionEntity({ data }: any) {
     return (
-        <section className="overflow-hidden bg-gray-50 mb-5">
+        <section className="overflow-hidden bg-gray-50">
             <div className="p-6 md:p-4 lg:px-6 lg:py-8">
                 <div className="mx-auto">
                     <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">

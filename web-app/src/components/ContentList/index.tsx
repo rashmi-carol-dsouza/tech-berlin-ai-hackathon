@@ -1,7 +1,7 @@
 import CollectionEntity from "../../components/ContentEntity/CollectionEntity";
 import AnswerEntity from "../../components/ContentEntity/AnswerEntity";
-import ShopEntity from "../../components/ContentEntity/ShopEntity";
-import RestaurantEntity from "../../components/ContentEntity/RestaurantEntity";
+import BusinessEntity from "../ContentEntity/BusinessEntity";
+import FactEntity from "../ContentEntity/FactEntity";
 
 export function getContentEntityByType(contentEntity: any) {
     switch (contentEntity.type) {
@@ -10,9 +10,11 @@ export function getContentEntityByType(contentEntity: any) {
         case 'answer':
             return <AnswerEntity data={contentEntity} />
         case 'shop':
-            return <ShopEntity data={contentEntity} />
+            return <BusinessEntity data={contentEntity} />
         case 'restaurant':
-            return <RestaurantEntity data={contentEntity} />
+            return <BusinessEntity data={contentEntity} />
+        case 'fact':
+            return <FactEntity data={contentEntity} />
         default:
             return null
     }
@@ -26,7 +28,7 @@ function ContentEntityList({ entities, isLoading }: any) {
     return (
         <ul>{entities.map((contentEntity: any) => {
             return (
-                <li key={contentEntity.id}>
+                <li key={contentEntity.id} className="mb-10">
                     {getContentEntityByType(contentEntity)}
                 </li>
             )
