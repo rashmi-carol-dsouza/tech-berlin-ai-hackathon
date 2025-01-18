@@ -1,0 +1,4 @@
+# Editor & OS
+.venv
+.vscode
+.DS_Store
