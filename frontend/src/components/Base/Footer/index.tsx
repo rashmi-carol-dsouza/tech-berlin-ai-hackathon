@@ -4,7 +4,7 @@ function Footer() {
     return (
         <footer>
             <Container>
-                <small>© 2025 Nayberhood</small>
+                <small>© 2025 Here & Now</small>
             </Container>
         </footer>
     );

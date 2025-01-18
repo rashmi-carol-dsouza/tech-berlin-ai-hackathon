@@ -5,10 +5,6 @@
                 {
                     "id": "m1234",
                     "text": "Welcome to Berlin! I'm your guide, and I'm here to help you explore the city. What would you like to do today?"
-                },
-                {
-                    "id": "m345",
-                    "text": "More text here!"
                 }
             ],
             "audio": [

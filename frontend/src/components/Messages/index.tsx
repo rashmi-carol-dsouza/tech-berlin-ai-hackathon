@@ -24,9 +24,9 @@ function Messages({ messages, isLoading, isError, error, queryInput }: MessagesP
     }
 
     return (
-        <ul className="space-y-2">
+        <ul className="space-y-2 mb-5">
             {messages.map((message) => (
-                <li key={message.id} className="p-2 border rounded-md shadow-sm">
+                <li key={message.id} className="rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8">
                     {message.text}
                 </li>
             ))}
