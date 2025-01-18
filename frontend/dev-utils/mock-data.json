@@ -1,0 +1,119 @@
+{
+    "entities": [
+        {
+            "id": "s1234",
+            "type": "collection",
+            "theme": "quaint_stores",
+            "title": "Cute Shopping",
+            "description": "Cute mom-and-pop stores around you",
+            "entities": [
+                {
+                    "id": "store-1245",
+                    "type": "shop",
+                    "title": "Kado - Liquorice Boutique",
+                    "description": "Something nice about liquorice and this store"
+                },
+                {
+                    "id": "store-6789",
+                    "type": "shop",
+                    "title": "Vintage Dreams",
+                    "description": "A cozy boutique filled with curated vintage treasures."
+                },
+                {
+                    "id": "store-9101",
+                    "type": "shop",
+                    "title": "Craft Corner",
+                    "description": "Handmade crafts and gifts made by local artisans."
+                }
+            ]
+        },
+        {
+            "id": "f1234",
+            "type": "fun_fact",
+            "theme": "history",
+            "title": "The Legacy of Albrecht Thaer in Friedrichshain",
+            "description": "Strolling through Thaerstraße in Friedrichshain, Berlin, you'll encounter a name steeped in agricultural history—Albrecht Thaer, the 'father of scientific agriculture.' Thaer's revolutionary work in soil fertility and crop rotation transformed farming into a precise science, ensuring food security for generations. His dedication to blending theory with practice is a reminder of how one man's vision can sow the seeds of progress. Explore the street that celebrates his enduring legacy in the heart of Berlin."
+        },
+        {
+            "id": "s5678",
+            "type": "collection",
+            "theme": "discover_cuisine",
+            "title": "Want to Try a Different Cuisine?",
+            "description": "Some of the restaurants that are very different from what you find typically in your neighbourhood",
+            "entities": [
+                {
+                    "id": "restaurant-1245",
+                    "type": "restaurant",
+                    "title": "Thänh Koch",
+                    "description": "Specializes in Hanoian cuisine"
+                },
+                {
+                    "id": "restaurant-5678",
+                    "type": "restaurant",
+                    "title": "El Ranchero",
+                    "description": "Authentic Mexican dishes with a modern twist."
+                },
+                {
+                    "id": "restaurant-9101",
+                    "type": "restaurant",
+                    "title": "Bombay Spice",
+                    "description": "A fusion of Indian street food and fine dining."
+                }
+            ]
+        },
+        {
+            "id": "e1234",
+            "type": "collection",
+            "theme": "events_nearby",
+            "title": "Exciting Events Happening Near You",
+            "description": "Don't miss these events around your neighborhood.",
+            "entities": [
+                {
+                    "id": "event-001",
+                    "type": "event",
+                    "title": "Open Mic Night",
+                    "description": "Showcase your talents at this cozy open mic night."
+                },
+                {
+                    "id": "event-002",
+                    "type": "event",
+                    "title": "Farmers Market",
+                    "description": "Fresh produce and local crafts every Saturday morning."
+                },
+                {
+                    "id": "event-003",
+                    "type": "event",
+                    "title": "Tech Meetup",
+                    "description": "Connect with tech enthusiasts and explore the latest innovations."
+                }
+            ]
+        },
+        {
+            "id": "p1234",
+            "type": "collection",
+            "theme": "parks_and_nature",
+            "title": "Relax in Green Spaces",
+            "description": "Discover beautiful parks and serene spots to unwind.",
+            "entities": [
+                {
+                    "id": "park-001",
+                    "type": "park",
+                    "title": "Volkspark Friedrichshain",
+                    "description": "A lush park perfect for picnics and leisurely walks."
+                },
+                {
+                    "id": "park-002",
+                    "type": "park",
+                    "title": "Tiergarten",
+                    "description": "Berlin's central park, offering vast greenery and scenic views."
+                },
+                {
+                    "id": "park-003",
+                    "type": "park",
+                    "title": "Botanical Garden",
+                    "description": "Explore a stunning collection of plants from around the world."
+                }
+            ]
+        }
+    ]
+}
