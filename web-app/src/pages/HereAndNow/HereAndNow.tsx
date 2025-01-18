@@ -5,9 +5,12 @@ import PromptBox from "../../components/PromptBox";
 import Messages, { Message } from "../../components/Messages";
 import { useLocation } from "../../context/Location";
 import LocationView from "./LocationView";
+import { useViewContext } from "../../context/View";
+import ContentEntityList from "../../components/ContentList";
 
 function HereAndNow() {
     const { coordinates } = useLocation();
+    const { viewState } = useViewContext();
     const [queryInput, setQueryInput] = useState<string | undefined>(undefined);
     const [messages, setMessages] = useState<Message[]>([]);
 
@@ -31,18 +34,21 @@ function HereAndNow() {
     return (
         <div>
             <LocationView coordinates={coordinates} />
-            <Messages
-                messages={messages}
-                isLoading={isLoading}
-                isError={isError}
-                error={error}
-                queryInput={queryInput}
-            />
-            <PromptBox
-                onSubmit={(inputValue: string) => setQueryInput(inputValue)}
-                onVoiceInput={() => console.log('Voice input not implemented')}
-                isLoading={isLoading}
-            />
+            {viewState === 'findNearby' && <ContentEntityList entities={data?.entities} isLoading={isLoading} />}
+            {viewState === 'askQuestion' && <>
+                <Messages
+                    messages={messages}
+                    isLoading={isLoading}
+                    isError={isError}
+                    error={error}
+                    queryInput={queryInput}
+                />
+                <PromptBox
+                    onSubmit={(inputValue: string) => setQueryInput(inputValue)}
+                    onVoiceInput={() => console.log('Voice input not implemented')}
+                    isLoading={isLoading}
+                />
+            </>}
         </div>
     );
 }

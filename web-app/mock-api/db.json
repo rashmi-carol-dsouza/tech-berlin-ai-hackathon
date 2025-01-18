@@ -19,18 +19,54 @@
                     "description": "Cute mom and pop stores around you",
                     "entities": [
                         {
-                            "id": "store-1245",
+                            "id": "store-1111",
                             "type": "shop",
                             "title": "Kado - Liquorice Boutique",
-                            "description": "Something nice about liquorice and this store"
+                            "description": "Variety of Liquorice from EU and South America",
+                            "distance": "0.2 km",
+                            "availability": "Until 21:00",
+                            "image": "https://picsum.photos/id/21/200/300",
+                            "altText": "A cute shop with a sign that says 'Kado - Liquorice Boutique'"
+                        },
+                        {
+                            "id": "store-1112",
+                            "type": "shop",
+                            "title": "Secondhand Moons",
+                            "description": "Used clothing store",
+                            "distance": "0.4 km",
+                            "availability": "Until 22:00",
+                            "image": "https://picsum.photos/id/26/200/300",
+                            "altText": "A secondhand clothing store with a variety of vintage and used clothes"
+                        },
+                        {
+                            "id": "store-1113",
+                            "type": "shop",
+                            "title": "Save the Cake",
+                            "description": "Hat shop",
+                            "distance": "0.1 km",
+                            "availability": "Until 19:00",
+                            "image": "https://picsum.photos/id/20/200/300",
+                            "altText": "A vibrant hat shop specializing in handmade hats, showcasing a colorful array of unique and artistic headwear"
+                        },
+                        {
+                            "id": "store-1114",
+                            "type": "shop",
+                            "title": "Großformat Berlin",
+                            "description": "Artsy Digital Print shop",
+                            "distance": "0.6 km",
+                            "availability": "Until 19:00",
+                            "image": "https://picsum.photos/id/36/200/300",
+                            "altText": "A digital print shop with a variety of artistic prints and posters"
                         }
                     ]
                 },
                 {
                     "id": "f1234",
-                    "type": "text",
+                    "type": "fact",
                     "theme": "history",
                     "title": "The Legacy of Albrecht Thaer in Friedrichshain",
+                    "image": "https://images.unsplash.com/photo-1484959014842-cd1d967a39cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+                    "altText": "A street in Berlin with a sign that says 'Thaerstraße'",
                     "description": "Strolling through Thaerstraße in Friedrichshain, Berlin, you'll encounter a name steeped in agricultural history—Albrecht Thaer, the 'father of scientific agriculture.' Thaer's revolutionary work in soil fertility and crop rotation transformed farming into a precise science, ensuring food security for generations. His dedication to blending theory with practice is a reminder of how one man's vision can sow the seeds of progress. Explore the street that celebrates his enduring legacy in the heart of Berlin."
                 },
                 {
@@ -41,10 +77,44 @@
                     "description": "Some of the restaurants that are very different from what you find typically in your neighbourhood",
                     "entities": [
                         {
-                            "id": "store-1245",
+                            "id": "r-1111",
                             "type": "restaurant",
                             "title": "Thänh Koch",
-                            "description": "Specialises in Hanoian cuisine"
+                            "description": "Specialities from the streets of Hanoi",
+                            "distance": "0.1 km",
+                            "availability": "Until 21:00",
+                            "image": "https://picsum.photos/id/44/200/300",
+                            "altText": "A Vietnamese restaurant with a variety of dishes from the streets of Hanoi"
+                        },
+                        {
+                            "id": "r-1112",
+                            "type": "restaurant",
+                            "title": "Bistro 1001",
+                            "description": "A taste of the Mediterranean",
+                            "distance": "0.3 km",
+                            "availability": "Until 22:00",
+                            "image": "https://picsum.photos/id/45/200/300",
+                            "altText": "A Mediterranean restaurant with a variety of dishes from the Mediterranean region"
+                        },
+                        {
+                            "id": "r-1113",
+                            "type": "restaurant",
+                            "title": "Biergarten am Volkspark",
+                            "description": "Traditional German beer garden",
+                            "distance": "0.5 km",
+                            "availability": "Until 23:00",
+                            "image": "https://picsum.photos/id/46/200/300",
+                            "altText": "A traditional German beer garden with a variety of German beers and dishes"
+                        },
+                        {
+                            "id": "r-1114",
+                            "type": "restaurant",
+                            "title": "Café Morgenrot",
+                            "description": "Vegan and vegetarian café",
+                            "distance": "0.2 km",
+                            "availability": "Until 19:00",
+                            "image": "https://picsum.photos/id/47/200/300",
+                            "altText": "A vegan and vegetarian café with a variety of vegan and vegetarian dishes"
                         }
                     ]
                 }

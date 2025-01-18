@@ -1,5 +1,27 @@
 import Container from '../Container';
+import { useRefContext } from '../../../context/Ref';
+import { useLocation } from '../../../context/Location';
+import { useViewContext } from '../../../context/View';
+
 function Header() {
+    const { inputRef } = useRefContext();
+    const { getCoordinates } = useLocation();
+    const { setViewState } = useViewContext();
+    
+    const handleFocusInput = () => {
+        inputRef?.current?.focus();
+    };
+
+    const handleAskQuestionClick = () => {
+        setViewState('askQuestion');
+        handleFocusInput();
+    };
+
+    const handleFindNearbyClick = () => {
+        setViewState('findNearby');
+        getCoordinates();
+    };
+
     return (
         <header className="border-b border-gray-200 bg-gray-50">
             <Container>
@@ -16,6 +38,7 @@ function Header() {
                         <button
                             className="inline-flex items-center justify-center gap-1.5 rounded border border-gray-200 bg-white px-5 py-3 text-gray-900 transition hover:text-gray-700 focus:outline-none focus:ring"
                             type="button"
+                            onClick={handleFindNearbyClick}
                         >
                             <span className="text-sm font-medium">Find what's nearby</span>
                         </button>
@@ -23,6 +46,7 @@ function Header() {
                         <button
                             className="inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                             type="button"
+                            onClick={handleAskQuestionClick}
                         >
                             Ask a question
                         </button>
@@ -30,7 +54,7 @@ function Header() {
                 </div>
             </Container>
         </header>
-    )
+    );
 }
 
 export default Header;
