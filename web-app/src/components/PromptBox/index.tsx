@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRefContext } from "../../context/Ref";
 
 type PromptBoxProps = {
     onSubmit: (inputValue: string) => void;
@@ -8,6 +9,7 @@ type PromptBoxProps = {
 
 function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
     const [inputValue, setInputValue] = useState('');
+    const { inputRef } = useRefContext();
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -21,6 +23,7 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
             onSubmit={handleSubmit}
         >
             <input
+                ref={inputRef}
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}

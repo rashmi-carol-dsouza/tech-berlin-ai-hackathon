@@ -1,5 +1,12 @@
 import Container from '../Container';
+import { useRefContext } from '../../../context/Ref';
+
 function Header() {
+    const { inputRef } = useRefContext();
+    const handleFocusInput = () => {
+        inputRef?.current?.focus();
+    };
+
     return (
         <header className="border-b border-gray-200 bg-gray-50">
             <Container>
@@ -23,6 +30,7 @@ function Header() {
                         <button
                             className="inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                             type="button"
+                            onClick={handleFocusInput}
                         >
                             Ask a question
                         </button>
@@ -30,7 +38,7 @@ function Header() {
                 </div>
             </Container>
         </header>
-    )
+    );
 }
 
 export default Header;
