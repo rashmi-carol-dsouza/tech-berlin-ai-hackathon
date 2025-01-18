@@ -3,7 +3,7 @@ import AnswerEntity from "../../components/ContentEntity/AnswerEntity";
 import ShopEntity from "../../components/ContentEntity/ShopEntity";
 import RestaurantEntity from "../../components/ContentEntity/RestaurantEntity";
 
-function getContentEntityByType(contentEntity: any) {
+export function getContentEntityByType(contentEntity: any) {
     switch (contentEntity.type) {
         case 'collection':
             return <CollectionEntity data={contentEntity} />
