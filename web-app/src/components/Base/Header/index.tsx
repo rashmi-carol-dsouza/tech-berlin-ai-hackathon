@@ -1,10 +1,16 @@
 import Container from '../Container';
 import { useRefContext } from '../../../context/Ref';
+import { useLocation } from '../../../context/Location';
 
 function Header() {
     const { inputRef } = useRefContext();
+    const { getCoordinates } = useLocation();
     const handleFocusInput = () => {
         inputRef?.current?.focus();
+    };
+
+    const handleFindNearbyClick = () => {
+        getCoordinates();
     };
 
     return (
@@ -23,6 +29,7 @@ function Header() {
                         <button
                             className="inline-flex items-center justify-center gap-1.5 rounded border border-gray-200 bg-white px-5 py-3 text-gray-900 transition hover:text-gray-700 focus:outline-none focus:ring"
                             type="button"
+                            onClick={handleFindNearbyClick}
                         >
                             <span className="text-sm font-medium">Find what's nearby</span>
                         </button>

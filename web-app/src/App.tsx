@@ -10,11 +10,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <LocationProvider>
-      <RefProvider>
-      <Layout>
-        <HereAndNow />
-      </Layout>
-      </RefProvider>
+        <RefProvider>
+          <Layout>
+            <HereAndNow />
+          </Layout>
+        </RefProvider>
       </LocationProvider>
     </QueryClientProvider>
   );
