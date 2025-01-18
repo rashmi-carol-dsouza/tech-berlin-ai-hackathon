@@ -1,0 +1,2 @@
+lmnt
+openai-whisper
