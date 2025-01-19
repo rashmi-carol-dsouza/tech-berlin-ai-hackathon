@@ -11,6 +11,7 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
     const [inputValue, setInputValue] = useState("");
     const { inputRef } = useRefContext();
     const [isRecording, setIsRecording] = useState(false);
+    const [audioLevel, setAudioLevel] = useState(0); // For audio detection
 
     const handleVoiceInput = () => {
         const SpeechRecognition =
@@ -26,6 +27,7 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
 
             recognition.onstart = () => {
                 console.log("Voice recording started...");
+                setIsRecording(true);
             };
 
             recognition.onresult = (event: any) => {
@@ -40,9 +42,9 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
 
             recognition.onend = () => {
                 console.log("Voice recording stopped.");
+                setIsRecording(false);
             };
         } else {
-            // Use MediaRecorder API if SpeechRecognition is not available
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                 alert("Your browser does not support audio recording.");
                 return;
@@ -51,11 +53,25 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
             navigator.mediaDevices
                 .getUserMedia({ audio: true })
                 .then((stream) => {
+                    const audioContext = new AudioContext();
+                    const mediaStreamSource = audioContext.createMediaStreamSource(stream);
+                    const analyser = audioContext.createAnalyser();
+                    mediaStreamSource.connect(analyser);
+
                     const mediaRecorder = new MediaRecorder(stream);
                     const audioChunks: Blob[] = [];
+                    const dataArray = new Uint8Array(analyser.fftSize);
 
                     mediaRecorder.start();
                     setIsRecording(true);
+
+                    const updateAudioLevel = () => {
+                        analyser.getByteFrequencyData(dataArray);
+                        const maxLevel = Math.max(...dataArray);
+                        setAudioLevel(maxLevel);
+                        if (isRecording) requestAnimationFrame(updateAudioLevel);
+                    };
+                    updateAudioLevel();
 
                     mediaRecorder.ondataavailable = (event) => {
                         audioChunks.push(event.data);
@@ -63,22 +79,11 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
 
                     mediaRecorder.onstop = async () => {
                         setIsRecording(false);
+                        setAudioLevel(0);
                         const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
                         const formData = new FormData();
                         formData.append("audio", audioBlob);
                         onVoiceInput(formData);
-                    };
-
-                    mediaRecorder.onstart = () => {
-                        console.log("Audio recording started...");
-                    };
-
-                    mediaRecorder.onpause = () => {
-                        console.log("Audio recording paused.");
-                    };
-
-                    mediaRecorder.onerror = (error) => {
-                        console.error("MediaRecorder error:", error);
                     };
 
                     setTimeout(() => {
@@ -141,6 +146,15 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
                     />
                 </svg>
             </button>
+            {isRecording && (
+                <div className="flex items-center gap-2 px-4 py-2 text-sm text-red-600">
+                    <span>Recording...</span>
+                    <div
+                        className="h-2 w-2 rounded-full bg-red-600 animate-ping"
+                        style={{ opacity: audioLevel / 255 }}
+                    ></div>
+                </div>
+            )}
         </form>
     );
 }
