@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getRelevantContentEntities } from "../../api/relevantContentEntities";
-import PromptBox from "../../components/PromptBox";
-import Messages, { Message } from "../../components/Messages";
 import { useLocation } from "../../context/Location";
 import LocationView from "./LocationView";
 import { useViewContext } from "../../context/View";
 import ContentEntityList from "../../components/ContentList";
+import ChatView from "./ChatView";
+import { Message } from "../../components/Messages";
 
 function HereAndNow() {
     const { coordinates } = useLocation();
     const { viewState } = useViewContext();
     const [queryInput, setQueryInput] = useState<string | undefined>(undefined);
     const [messages, setMessages] = useState<Message[]>([]);
+
+    const handleQueryInput = (input: string) => {
+        setQueryInput(input);
+        setMessages((prevMessages) => [...prevMessages, { id: prevMessages.length, text: input, origin: 'user' }]);
+    }
 
     const { data, isError, isLoading, error } = useQuery({
         queryKey: ['contentEntities', queryInput],
@@ -25,6 +30,7 @@ function HereAndNow() {
             const newMessages = data.messages.map((message: any, index: number) => ({
                 id: message.id || index,
                 text: message.text,
+                type: 'bot',
                 audio: data.audio && data.audio[index], // Associate audio if available
             }));
             setMessages((prevMessages) => [...prevMessages, ...newMessages]);
@@ -35,20 +41,7 @@ function HereAndNow() {
         <div>
             <LocationView coordinates={coordinates} />
             {viewState === 'findNearby' && <ContentEntityList entities={data?.entities} isLoading={isLoading} />}
-            {viewState === 'askQuestion' && <>
-                <Messages
-                    messages={messages}
-                    isLoading={isLoading}
-                    isError={isError}
-                    error={error}
-                    queryInput={queryInput}
-                />
-                <PromptBox
-                    onSubmit={(inputValue: string) => setQueryInput(inputValue)}
-                    onVoiceInput={() => console.log('Voice input not implemented')}
-                    isLoading={isLoading}
-                />
-            </>}
+            {viewState === 'askQuestion' && <ChatView messages={messages} isLoading={false} isError={isError} error={error} queryInput={queryInput} setQueryInput={handleQueryInput} />}
         </div>
     );
 }

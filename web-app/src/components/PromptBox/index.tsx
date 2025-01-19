@@ -1,20 +1,107 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useRefContext } from "../../context/Ref";
 
 type PromptBoxProps = {
     onSubmit: (inputValue: string) => void;
-    onVoiceInput: () => void;
+    onVoiceInput: (f: FormData) => void;
     isLoading: boolean;
-}
+};
 
 function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState("");
     const { inputRef } = useRefContext();
+    const [isRecording, setIsRecording] = useState(false);
+    const [audioLevel, setAudioLevel] = useState(0); // For audio detection
+
+    const handleVoiceInput = () => {
+        const SpeechRecognition =
+            (window as any).SpeechRecognition ||
+            (window as any).webkitSpeechRecognition;
+
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.lang = "en-US"; // Set language
+            recognition.interimResults = false;
+
+            recognition.start();
+
+            recognition.onstart = () => {
+                console.log("Voice recording started...");
+                setIsRecording(true);
+            };
+
+            recognition.onresult = (event: any) => {
+                const transcript = event.results[0][0].transcript;
+                console.log("Recognized text:", transcript);
+                setInputValue((prev) => prev + transcript);
+            };
+
+            recognition.onerror = (event: any) => {
+                console.error("Speech recognition error:", event.error);
+            };
+
+            recognition.onend = () => {
+                console.log("Voice recording stopped.");
+                setIsRecording(false);
+            };
+        } else {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                alert("Your browser does not support audio recording.");
+                return;
+            }
+
+            navigator.mediaDevices
+                .getUserMedia({ audio: true })
+                .then((stream) => {
+                    const audioContext = new AudioContext();
+                    const mediaStreamSource = audioContext.createMediaStreamSource(stream);
+                    const analyser = audioContext.createAnalyser();
+                    mediaStreamSource.connect(analyser);
+
+                    const mediaRecorder = new MediaRecorder(stream);
+                    const audioChunks: Blob[] = [];
+                    const dataArray = new Uint8Array(analyser.fftSize);
+
+                    mediaRecorder.start();
+                    setIsRecording(true);
+
+                    const updateAudioLevel = () => {
+                        analyser.getByteFrequencyData(dataArray);
+                        const maxLevel = Math.max(...dataArray);
+                        setAudioLevel(maxLevel);
+                        if (isRecording) requestAnimationFrame(updateAudioLevel);
+                    };
+                    updateAudioLevel();
+
+                    mediaRecorder.ondataavailable = (event) => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = async () => {
+                        setIsRecording(false);
+                        setAudioLevel(0);
+                        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+                        const formData = new FormData();
+                        formData.append("audio", audioBlob);
+                        onVoiceInput(formData);
+                    };
+
+                    setTimeout(() => {
+                        mediaRecorder.stop();
+                        stream.getTracks().forEach((track) => track.stop());
+                    }, 5000); // Automatically stop recording after 5 seconds
+                })
+                .catch((error) => {
+                    console.error("Error accessing microphone:", error);
+                });
+        }
+    };
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
+        if (!inputValue.trim()) return;
         onSubmit(inputValue);
-        setInputValue('');
+        setInputValue("");
     };
 
     return (
@@ -38,10 +125,11 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
                 Submit
             </button>
             <button
-                className="flex-[1] px-4 py-2 text-gray-700 bg-gray-50 focus:relative"
+                className={`flex-[1] px-4 py-2 text-gray-700 focus:relative ${isRecording ? "bg-red-200" : ""
+                    }`}
                 title="Speak"
-                disabled={true}
-                onClick={onVoiceInput}
+                onClick={handleVoiceInput}
+                disabled={isRecording}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +146,15 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
                     />
                 </svg>
             </button>
+            {isRecording && (
+                <div className="flex items-center gap-2 px-4 py-2 text-sm text-red-600">
+                    <span>Recording...</span>
+                    <div
+                        className="h-2 w-2 rounded-full bg-red-600 animate-ping"
+                        style={{ opacity: audioLevel / 255 }}
+                    ></div>
+                </div>
+            )}
         </form>
     );
 }

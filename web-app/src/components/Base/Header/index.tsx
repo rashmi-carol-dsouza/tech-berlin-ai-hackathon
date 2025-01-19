@@ -2,12 +2,13 @@ import Container from '../Container';
 import { useRefContext } from '../../../context/Ref';
 import { useLocation } from '../../../context/Location';
 import { useViewContext } from '../../../context/View';
+import Logo from '../Logo';
 
 function Header() {
     const { inputRef } = useRefContext();
     const { getCoordinates } = useLocation();
     const { setViewState } = useViewContext();
-    
+
     const handleFocusInput = () => {
         inputRef?.current?.focus();
     };
@@ -27,7 +28,10 @@ function Header() {
             <Container>
                 <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Here & Now</h1>
+                        <div className='flex'>
+                            <Logo />
+                            <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Here & Now</h1>
+                        </div>
 
                         <p className="mt-1.5 text-sm text-gray-500">
                             Discover popular, quaint, fun places, and experiences near you.
