@@ -1,8 +1,11 @@
 import { useRef, useState } from "react";
+import clsx from 'clsx';
+import Logo from "../Base/Logo";
 
 export type Message = {
     id: number;
     text: string;
+    origin?: string;
     audio?: string; // Make audio optional
 };
 
@@ -10,9 +13,44 @@ type MessagesProps = {
     messages: Message[];
     isLoading: boolean;
     isError: boolean;
-    error: any;
+    error: Error | null;
     queryInput?: string;
 };
+
+type MessageProps = {
+    message: Message;
+    handleToggleAudio: (messageId: number, audioUrl: string) => void;
+    currentlyPlaying: number | null;
+};
+
+function Message({ message, handleToggleAudio, currentlyPlaying }: MessageProps) {
+    const defaultStyles = "rounded-xl bg-white p-2 ring ring-indigo-50 sm:p-4 lg:p-6 w-fit";
+    const isUserMessage = message.origin === "user";
+    return (
+        <div
+            className={clsx(defaultStyles, isUserMessage && "bg-indigo-50")}
+        >
+            <div className="flex items-center gap-4">
+                {!isUserMessage && (<Logo />)}
+                <div>
+                    <p>{message.text}</p>
+                    {message.audio && (
+                        <button
+                            onClick={() => handleToggleAudio(message.id, message.audio!)}
+                            className={`mt-2 px-2 py-1 rounded shadow text-white focus:outline-none focus:ring-2 ${currentlyPlaying === message.id
+                                ? "bg-red-500 hover:bg-red-600 focus:ring-red-400"
+                                : "bg-indigo-500 hover:bg-indigo-600 focus:ring-indigo-400"
+                                }`}
+                        >
+                            {currentlyPlaying === message.id ? "Pause" : "Play"}
+                        </button>
+                    )}
+                </div>
+            </div>
+
+        </div>
+    );
+}
 
 function Messages({ messages, isLoading, isError, error, queryInput }: MessagesProps) {
     const [currentlyPlaying, setCurrentlyPlaying] = useState<number | null>(null); // Track which audio is playing
@@ -43,7 +81,7 @@ function Messages({ messages, isLoading, isError, error, queryInput }: MessagesP
     }
 
     if (isError) {
-        return <p className="text-red-500">Error: {error.message}</p>;
+        return <p className="text-red-500">Error: {error!.message}</p>;
     }
 
     if (!queryInput) {
@@ -55,27 +93,22 @@ function Messages({ messages, isLoading, isError, error, queryInput }: MessagesP
     }
 
     return (
-        <ul className="space-y-2 mb-5">
-            {messages.map((message) => (
-                <li
-                    key={message.id}
-                    className="rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8"
-                >
-                    <p>{message.text}</p>
-                    {message.audio && (
-                        <button
-                            onClick={() => toggleAudio(message.id, message.audio!)}
-                            className={`mt-2 px-4 py-2 rounded-lg shadow text-white focus:outline-none focus:ring-2 ${
-                                currentlyPlaying === message.id
-                                    ? "bg-red-500 hover:bg-red-600 focus:ring-red-400"
-                                    : "bg-indigo-500 hover:bg-indigo-600 focus:ring-indigo-400"
-                            }`}
-                        >
-                            {currentlyPlaying === message.id ? "Pause Audio" : "Play Audio"}
-                        </button>
-                    )}
-                </li>
-            ))}
+        <ul className="flex flex-col">
+            {messages.map((message) => {
+                const isUserMessage = message.origin === "user";
+                return (
+                    <li
+                        key={message.id}
+                        className={clsx("mb-4", isUserMessage && "self-end")}
+                    >
+                        <Message
+                            message={message}
+                            handleToggleAudio={toggleAudio}
+                            currentlyPlaying={currentlyPlaying}
+                        />
+                    </li>
+                )
+            })}
         </ul>
     );
 }
