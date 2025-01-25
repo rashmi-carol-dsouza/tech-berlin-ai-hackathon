@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 import requests
 from dotenv import load_dotenv
 import os
@@ -147,7 +147,7 @@ def get_nearby_places_by_types(latitude, longitude, radius=1000, min_rating=4.0)
 
 
 def collect_and_save_data(latitude, longitude):
-    current_time = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     data = {"timestamp": current_time}
 
     try:
