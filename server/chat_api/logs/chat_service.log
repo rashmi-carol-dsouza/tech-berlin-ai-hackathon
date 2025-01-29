@@ -1,0 +1,160 @@
+2025-01-29 11:46:47.672 | WARNING  | app.chat_service:load_existing_context:85 - ⚠️ No existing context found. The server will start without context.
+2025-01-29 11:46:56.436 | INFO     | app.main:local_info:31 - Received location data: latitude=52.531754 longitude=13.464689
+2025-01-29 11:47:02.401 | INFO     | app.main:local_info:35 - Data collection successful, updating context.
+2025-01-29 11:47:07.760 | SUCCESS  | app.chat_service:update_context:110 - ✅ New context saved and initialized.
+2025-01-29 11:47:07.760 | SUCCESS  | app.main:local_info:40 - Context updated successfully.
+2025-01-29 11:47:11.146 | INFO     | app.main:chat:50 - Received chat query: what is fun around here?
+2025-01-29 11:47:11.146 | INFO     | app.chat_service:chat_with_context:121 - 💬 Received chat question: what is fun around here?
+2025-01-29 11:47:13.027 | SUCCESS  | app.chat_service:chat_with_context:140 - ✅ Chat response generated successfully.
+2025-01-29 11:47:13.027 | SUCCESS  | app.main:chat:52 - Chat response generated successfully.
+2025-01-29 11:47:37.957 | INFO     | app.chat_service:load_existing_context:57 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 11:47:37.960 | INFO     | app.chat_service:load_existing_context:68 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T10:46:56Z",
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has changed name several times since.\n\n\n== Notable places nearby ==\nSchwimm- und Sprunghalle im Europa...
+2025-01-29 11:47:42.828 | SUCCESS  | app.chat_service:load_existing_context:79 - ✅ Context initialized successfully.
+2025-01-29 14:09:27.904 | INFO     | app.chat_service:load_existing_context:57 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 14:09:27.910 | INFO     | app.chat_service:load_existing_context:68 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T10:46:56Z",
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has changed name several times since.\n\n\n== Notable places nearby ==\nSchwimm- und Sprunghalle im Europa...
+2025-01-29 14:09:35.994 | SUCCESS  | app.chat_service:load_existing_context:79 - ✅ Context initialized successfully.
+2025-01-29 15:03:35.697 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:03:35.701 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T10:46:56Z",
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has changed name several times since.\n\n\n== Notable places nearby ==\nSchwimm- und Sprunghalle im Europa...
+2025-01-29 15:03:41.321 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:04:00.001 | SUCCESS  | app.chat_service:update_context:128 - ✅ New context saved and initialized.
+2025-01-29 15:04:00.002 | INFO     | app.main:local_info:24 - ✅ Location-based data collected and stored.
+2025-01-29 15:04:06.952 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: what is weather likee?
+2025-01-29 15:04:07.911 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:04:30.191 | INFO     | app.chat_service:synthesize:74 - ✅ Audio response saved to /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/response.mp3
+2025-01-29 15:06:37.973 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:06:37.977 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T14:03:46Z",
+  "elevation": {
+    "latitude": 52.531754,
+    "longitude": 13.464689,
+    "elevation": 53.0
+  },
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has cha...
+2025-01-29 15:06:44.532 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:08:21.479 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:08:21.491 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T14:03:46Z",
+  "elevation": {
+    "latitude": 52.531754,
+    "longitude": 13.464689,
+    "elevation": 53.0
+  },
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has cha...
+2025-01-29 15:08:27.606 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:08:38.189 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:08:38.193 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T14:03:46Z",
+  "elevation": {
+    "latitude": 52.531754,
+    "longitude": 13.464689,
+    "elevation": 53.0
+  },
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has cha...
+2025-01-29 15:08:43.877 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:08:48.342 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: what is weather likee?
+2025-01-29 15:08:49.411 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:09:09.155 | INFO     | app.chat_service:synthesize:74 - ✅ Audio response saved to /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/response.mp3
+2025-01-29 15:12:31.970 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:12:31.974 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T14:03:46Z",
+  "elevation": {
+    "latitude": 52.531754,
+    "longitude": 13.464689,
+    "elevation": 53.0
+  },
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has cha...
+2025-01-29 15:12:37.899 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:13:03.699 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:13:03.713 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T14:03:46Z",
+  "elevation": {
+    "latitude": 52.531754,
+    "longitude": 13.464689,
+    "elevation": 53.0
+  },
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has cha...
+2025-01-29 15:13:11.543 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:13:11.559 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: what is weather likee?
+2025-01-29 15:13:12.786 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:13:29.991 | INFO     | app.chat_service:synthesize:74 - ✅ Audio response saved to /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/response.mp3
+2025-01-29 15:14:24.354 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: what is weather likee?
+2025-01-29 15:14:25.490 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:14:44.440 | INFO     | app.chat_service:synthesize:74 - ✅ Audio response saved to /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/response.mp3
+2025-01-29 15:15:21.559 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: how is the street named after?
+2025-01-29 15:15:23.038 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:15:52.038 | INFO     | app.chat_service:synthesize:74 - ✅ Audio response saved to /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/response.mp3
+2025-01-29 15:31:57.050 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:31:57.064 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T14:03:46Z",
+  "elevation": {
+    "latitude": 52.531754,
+    "longitude": 13.464689,
+    "elevation": 53.0
+  },
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has cha...
+2025-01-29 15:32:05.741 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:32:05.757 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: how is the street named after?
+2025-01-29 15:32:06.773 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:32:07.180 | ERROR    | app.chat_service:chat_with_context:163 - ❌ Chat processing error: SpeechError [status=400] [Speech.synthesize]: Invalid `model` requested. Supported values: ['aurora', 'blizzard']
+2025-01-29 15:32:26.273 | INFO     | app.chat_service:load_existing_context:83 - ✅ Found existing context file at /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/context.json
+2025-01-29 15:32:26.277 | INFO     | app.chat_service:load_existing_context:93 - ✅ Loaded context: {
+  "timestamp": "2025-01-29T14:03:46Z",
+  "elevation": {
+    "latitude": 52.531754,
+    "longitude": 13.464689,
+    "elevation": 53.0
+  },
+  "wikipedia_articles": [
+    {
+      "title": "Berlin Landsberger Allee station",
+      "distance": 739,
+      "content": "Landsberger Allee is a railway station in the Prenzlauer Berg district of Berlin, close to the district's border with Fennpfuhl. It is served by the S-Bahn lines S41, S42, S8 and S85. The station was named Leninallee in 1950 and has cha...
+2025-01-29 15:32:33.017 | SUCCESS  | app.chat_service:load_existing_context:102 - ✅ Context initialized successfully.
+2025-01-29 15:32:37.287 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: how is the street named after?
+2025-01-29 15:32:38.729 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:33:07.677 | INFO     | app.chat_service:synthesize:74 - ✅ Audio response saved to /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/response.mp3
+2025-01-29 15:33:33.019 | INFO     | app.chat_service:chat_with_context:139 - 💬 Received chat question: how is the street named after?
+2025-01-29 15:33:34.222 | SUCCESS  | app.chat_service:chat_with_context:154 - ✅ Chat response generated successfully.
+2025-01-29 15:34:00.119 | INFO     | app.chat_service:synthesize:74 - ✅ Audio response saved to /home/rashmi/Projects/ai-hackathon/tech-berlin-ai-hackathon/server/chat_api/app/../data/response.mp3

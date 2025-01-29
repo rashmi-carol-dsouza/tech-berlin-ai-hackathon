@@ -15,6 +15,7 @@ sentence-transformers = "^3.4.0"
 faiss-cpu = "^1.9.0.post1"
 langchain-huggingface = "^0.1.2"
 loguru = "^0.7.3"
+lmnt = "^1.1.7"
 
 
 [tool.poetry.group.dev.dependencies]
