@@ -4,6 +4,4 @@ collected_data.json
 __pycache__
 context.json
 poetry.lock
-makefile
-logs
-data
+
