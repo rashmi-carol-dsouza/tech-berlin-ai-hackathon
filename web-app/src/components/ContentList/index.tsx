@@ -21,8 +21,14 @@ export function getContentEntityByType(contentEntity: any) {
 }
 
 function ContentEntityList({ entities, isLoading }: any) {
-    if(isLoading) {
-        return <p>Loading...</p>
+    if (isLoading) {
+        return (
+            <div className="bg-gray-100 px-4 py-3 text-gray-700 rounded-lg shadow-md w-1/4 mx-auto">
+                <p className="text-center text-sm font-medium animate-pulse">
+                    Loading...
+                </p>
+            </div>
+        );
     }
 
     return (

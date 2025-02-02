@@ -1,29 +1,29 @@
+import { useState } from "react";
 import Messages, { Message } from "../../../components/Messages";
 import PromptBox from "../../../components/PromptBox";
 
-type ChatViewProps = {
-    messages: Message[];
-    isLoading: boolean;
-    isError: boolean;
-    error: Error | null;
-    queryInput?: string;
-    setQueryInput: (input: string) => void;
-};
+function ChatView() {
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [queryInput, setQueryInput] = useState<string | undefined>(undefined);
 
-function ChatView({ messages, isLoading, isError, error, queryInput, setQueryInput }: ChatViewProps) {
+    const handleQueryInput = (input: string) => {
+        console.log(input);
+        setQueryInput(input);
+        setMessages((prevMessages) => [...prevMessages, { id: prevMessages.length, text: input, origin: 'user' }]);
+    }
     return (
         <>
             <Messages
                 messages={messages}
-                isLoading={isLoading}
-                isError={isError}
-                error={error}
+                isLoading={false}
+                isError={false}
+                error={null}
                 queryInput={queryInput}
             />
             <PromptBox
-                onSubmit={(inputValue: string) => setQueryInput(inputValue)}
+                onSubmit={(inputValue: string) => handleQueryInput(inputValue)}
                 onVoiceInput={() => console.log('Voice input not implemented')}
-                isLoading={isLoading}
+                isLoading={false}
             />
         </>
     );

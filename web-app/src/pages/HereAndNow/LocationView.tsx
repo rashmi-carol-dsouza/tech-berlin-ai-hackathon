@@ -13,7 +13,7 @@ function LocationView({ coordinates }: LocationViewProps) {
                     {new Date().toLocaleString()}
                 </time>
                 <p className="mt-0.5 font-medium text-gray-900">
-                    Lat: {coordinates.lat}, Lon: {coordinates.long}
+                    Latitude: {coordinates.lat}, Longitude: {coordinates.long}
                 </p>
             </div>
         </article>

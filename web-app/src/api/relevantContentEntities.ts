@@ -1,8 +1,19 @@
+const BACKEND_API_URL = import.meta.env.VITE_BACKEND_API_URL;
 
-const API_ENDPOINT = "http://localhost:4000/relevant-entities";
-
-export async function getRelevantContentEntities(lat: number, long: number, query?: string) {
-    const response = await fetch(`${API_ENDPOINT}?lat=${lat}&long=${long}&query=${query}`);
+export async function getRelevantContentEntities(lat: number, long: number) {
+    const requestUrl = new URL(`${BACKEND_API_URL}/local-info/`);
+    const response = await fetch(requestUrl.toString(), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+         body: JSON.stringify({
+            latitude: lat,
+            longitude: long,
+         }),
+    });
     const data = await response.json();
-    return data[0];
+    return {
+        entities: Object.values(data['data']['content_entities']),
+    }
 }
