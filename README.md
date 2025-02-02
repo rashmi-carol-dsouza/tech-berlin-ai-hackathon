@@ -1,8 +1,6 @@
 # Walkabout
 
-## Frontend
-
-### Running Locally
+## Running Locally
 
 1. Open terminal - Run `make all` - this will start the development frontend server and print a URL that you can navigate to
 2. In another terminal - run `cd server/chat_api && make all` - this will start the backend server
