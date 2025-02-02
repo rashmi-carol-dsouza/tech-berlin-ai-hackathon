@@ -18,8 +18,12 @@ function HereAndNow() {
 
     return (
         <div>
-            {isLoading && <HeroBanner coordinates={coordinates} />}
-            {viewState === 'findNearby' && <ContentEntityList entities={data?.entities} isLoading={isLoading} />}
+            {viewState === 'findNearby' && (
+                <>
+                    {isLoading && <HeroBanner coordinates={coordinates} />}
+                    <ContentEntityList entities={data?.entities} isLoading={isLoading} />
+                </>
+            )}
             {viewState === 'askQuestion' && <ChatView />}
         </div>
     );

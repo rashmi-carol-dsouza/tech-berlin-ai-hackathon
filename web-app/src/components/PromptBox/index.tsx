@@ -115,7 +115,7 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 className="flex-[8] rounded-md border py-2.5 px-4 sm:text-sm"
-                placeholder="Type your message..."
+                placeholder="Tell me something interesting about this place..."
             />
             <button
                 disabled={isLoading}
@@ -124,7 +124,7 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
             >
                 Submit
             </button>
-            <button
+            {/* <button
                 className={`flex-[1] px-4 py-2 text-gray-700 focus:relative ${isRecording ? "bg-red-200" : ""
                     }`}
                 title="Speak"
@@ -145,7 +145,7 @@ function PromptBox({ onSubmit, onVoiceInput, isLoading }: PromptBoxProps) {
                         d="M12 1.5a3.75 3.75 0 00-3.75 3.75v6a3.75 3.75 0 007.5 0v-6A3.75 3.75 0 0012 1.5zm-6 9a.75.75 0 00-1.5 0v1.5a7.5 7.5 0 0015 0V10.5a.75.75 0 00-1.5 0v1.5a6 6 0 01-12 0V10.5zM12 15a.75.75 0 00-.75.75v3a.75.75 0 001.5 0v-3A.75.75 0 0012 15z"
                     />
                 </svg>
-            </button>
+            </button> */}
             {isRecording && (
                 <div className="flex items-center gap-2 px-4 py-2 text-sm text-red-600">
                     <span>Recording...</span>
