@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getRelevantContentEntities } from "../../api/relevantContentEntities";
 import { useLocation } from "../../context/Location";
-import LocationView from "./LocationView";
 import { useViewContext } from "../../context/View";
 import ContentEntityList from "../../components/ContentList";
 import ChatView from "./ChatView";
+import HeroBanner from "./HeroBanner";
 
 function HereAndNow() {
     const { coordinates } = useLocation();
@@ -18,7 +18,7 @@ function HereAndNow() {
 
     return (
         <div>
-            <LocationView coordinates={coordinates} />
+            {isLoading && <HeroBanner coordinates={coordinates} />}
             {viewState === 'findNearby' && <ContentEntityList entities={data?.entities} isLoading={isLoading} />}
             {viewState === 'askQuestion' && <ChatView />}
         </div>
