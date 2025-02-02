@@ -7,6 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain_mistralai.chat_models import ChatMistralAI
 from dotenv import load_dotenv
+from loguru import logger
 import os
 
 # Load environment variables from .env
@@ -79,4 +80,4 @@ while True:
     if user_question.lower() in ["exit", "quit"]:
         break
     answer = chat_with_context(user_question)
-    print(f"Assistant: {answer}")
+    logger.info(f"Assistant: {answer}")

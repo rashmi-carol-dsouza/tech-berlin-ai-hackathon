@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 import requests
 from dotenv import load_dotenv
 import os
+from loguru import logger
 
 # Load environment variables
 load_dotenv()
@@ -141,7 +142,7 @@ def get_nearby_places_by_types(latitude, longitude, radius=1000, min_rating=4.0)
             else:
                 filtered_places[place_type] = places
         else:
-            print(f"Error fetching data for type {place_type}: {response.status_code}")
+            logger.error(f"Error fetching data for type {place_type}: {response.status_code}")
 
     return filtered_places
 
@@ -153,7 +154,7 @@ def collect_and_save_data(latitude, longitude):
     try:
         data["elevation"] = get_elevation(latitude, longitude)
     except Exception as e:
-        print(f"Error fetching elevation: {e}")
+        logger.error(f"Error fetching elevation: {e}")
 
     try:
         wiki_articles = get_wikipedia_nearby_events(latitude, longitude)
@@ -166,28 +167,28 @@ def collect_and_save_data(latitude, longitude):
             for article in wiki_articles
         ]
     except Exception as e:
-        print(f"Error fetching Wikipedia articles: {e}")
+        logger.error(f"Error fetching Wikipedia articles: {e}")
 
     try:
         data["osm_metadata"] = get_osm_metadata(latitude, longitude)
     except Exception as e:
-        print(f"Error fetching OSM metadata: {e}")
+        logger.error(f"Error fetching OSM metadata: {e}")
 
     try:
         data["weather"] = get_weather(latitude, longitude)
     except Exception as e:
-        print(f"Error fetching weather: {e}")
+        logger.error(f"Error fetching weather: {e}")
 
     try:
         data["nearby_places"] = get_nearby_places_by_types(latitude, longitude)
     except Exception as e:
-        print(f"Error fetching nearby places: {e}")
+        logger.error(f"Error fetching nearby places: {e}")
 
     # Save data to JSON file
     with open("collected_data.json", "w") as json_file:
         json.dump(data, json_file, indent=4)
 
-    print("Data successfully saved to collected_data.json")
+    logger.success("Data successfully saved to collected_data.json")
 
 
 # Example usage

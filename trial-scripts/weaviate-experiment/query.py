@@ -2,6 +2,7 @@ import weaviate
 from weaviate.auth import AuthApiKey
 import os
 from dotenv import load_dotenv
+from loguru import logger
 # Load environment variables
 load_dotenv()
 # Best practice: store your credentials in environment variables
@@ -24,10 +25,10 @@ books = client.collections.get("BookCollection")
 # Fetch objects and display the first one
 try:
     response = books.query.fetch_objects(limit=1)  # Fetch the first entry
-    print(response)
+    logger.info(response)
 
 except Exception as e:
-    print(f"Error retrieving the first entry: {e}")
+    logger.error(f"Error retrieving the first entry: {e}")
 
 finally:
     client.close()

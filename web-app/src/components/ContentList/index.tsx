@@ -21,8 +21,8 @@ export function getContentEntityByType(contentEntity: any) {
 }
 
 function ContentEntityList({ entities, isLoading }: any) {
-    if(isLoading) {
-        return <p>Loading...</p>
+    if (isLoading) {
+        return null;
     }
 
     return (

@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from weaviate import connect_to_weaviate_cloud
 from weaviate.auth import AuthApiKey
+from loguru import logger
 
 # Load environment variables
 load_dotenv()
@@ -65,10 +66,10 @@ try:
                 vector=book.get("vector"),  # Add the embedding vector
                 vector_name="cohereFirst"  # Explicitly specify the vector name
             )
-    print("Books successfully added to BookCollection!")
+    logger.debug("Books successfully added to BookCollection!")
 
 except Exception as e:
-    print(f"Error while adding books: {e}")
+    logger.error(f"Error while adding books: {e}")
 
 finally:
     # Ensure connection is properly closed

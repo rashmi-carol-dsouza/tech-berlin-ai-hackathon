@@ -1,6 +1,7 @@
 import weaviate
 from weaviate.classes.init import Auth
 from dotenv import load_dotenv
+from loguru import logger
 import os
 
 # Load environment variables from .env file
@@ -22,7 +23,7 @@ client = weaviate.connect_to_weaviate_cloud(
 
 # Check if the client is ready
 try:
-    print(client.is_ready())
+    logger.debug(client.is_ready())
 finally:
     # Ensure the connection is properly closed
     client.close()

@@ -1,6 +1,5 @@
 import json
 import os
-import asyncio
 from loguru import logger
 from lmnt.api import Speech
 from langchain.docstore.document import Document
@@ -40,7 +39,8 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-
 model = ChatMistralAI(mistral_api_key=mistral_api_key)
 
 # Chat prompt template
-prompt = ChatPromptTemplate.from_template("""
+prompt = ChatPromptTemplate.from_template(
+    """
 You are a helpful assistant. Use the provided context to answer questions conversationally.
 
 Chat History:
@@ -52,26 +52,28 @@ Context:
 {context}
 
 User: {input}
-""")
+"""
+)
 
 
 class LMNTtts:
     """Handles text-to-speech conversion using LMNT API."""
-    def __init__(self, api_key: str, model: str = 'blizzard', voice_id: str = 'lily'):
+
+    def __init__(self, api_key: str, model: str = "blizzard", voice_id: str = "lily"):
         self.api_key = api_key
         self.voice_id = voice_id
         self.model = model
-        self.output_file = os.path.join(data_dir, 'response.mp3')
+        self.output_file = os.path.join(data_dir, "response.mp3")
 
     async def synthesize(self, text: str) -> str:
         """Convert text to speech and save as an MP3 file."""
         async with Speech(self.api_key) as speech:
             synthesis = await speech.synthesize(text, self.voice_id, model=self.model)
-        
-        with open(self.output_file, 'wb') as f:
-            f.write(synthesis['audio'])
 
-        logger.info(f"✅ Audio response saved to {self.output_file}")
+        with open(self.output_file, "wb") as f:
+            f.write(synthesis["audio"])
+
+        logger.success(f"Audio response saved to {self.output_file}")
         return self.output_file
 
 
@@ -80,7 +82,7 @@ def load_existing_context():
     global chat_context, retriever
 
     if os.path.exists(data_path):
-        logger.info(f"✅ Found existing context file at {data_path}")
+        logger.info(f"Found existing context file at {data_path}")
         try:
             with open(data_path, "r") as json_file:
                 chat_context = json.load(json_file)
@@ -90,22 +92,26 @@ def load_existing_context():
                 chat_context = None
                 return
 
-            logger.info(f"✅ Loaded context: {json.dumps(chat_context, indent=2)[:500]}...")
+            logger.info("Loaded context.")
 
-            text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=500, chunk_overlap=50
+            )
             documents = text_splitter.split_documents(
                 [Document(page_content=json.dumps(chat_context))]
             )
 
             vector = FAISS.from_documents(documents, embeddings)
             retriever = vector.as_retriever(search_kwargs={"k": 3})
-            logger.success("✅ Context initialized successfully.")
+            logger.success("Context initialized successfully.")
 
         except Exception as e:
-            logger.error(f"❌ Error loading context: {e}")
+            logger.error(f"Error loading context: {e}")
             chat_context = None
     else:
-        logger.warning("⚠️ No existing context found. The server will start without context.")
+        logger.warning(
+            "⚠️ No existing context found. The server will start without context."
+        )
 
 
 def update_context(new_context):
@@ -125,7 +131,7 @@ def update_context(new_context):
 
     vector = FAISS.from_documents(documents, embeddings)
     retriever = vector.as_retriever()
-    logger.success("✅ New context saved and initialized.")
+    logger.success("New context saved and initialized.")
 
 
 async def chat_with_context(question):
@@ -133,7 +139,9 @@ async def chat_with_context(question):
     global chat_history, chat_context, retriever
 
     if chat_context is None or retriever is None:
-        raise ValueError("Context not initialized. Please call `/local-info/` first to provide location data.")
+        raise ValueError(
+            "Context not initialized. Please call `/local-info/` first to provide location data."
+        )
 
     try:
         logger.info(f"💬 Received chat question: {question}")
@@ -143,15 +151,17 @@ async def chat_with_context(question):
         document_chain = create_stuff_documents_chain(model, prompt)
         retrieval_chain = create_retrieval_chain(retriever, document_chain)
 
-        response = retrieval_chain.invoke({
-            "input": question,
-            "template_variables": {"chat_history": chat_history, "context": ""},
-        })
+        response = retrieval_chain.invoke(
+            {
+                "input": question,
+                "template_variables": {"chat_history": chat_history, "context": ""},
+            }
+        )
 
         answer = response["answer"]
         chat_history.append({"sender": "Assistant", "text": answer})
 
-        logger.success("✅ Chat response generated successfully.")
+        logger.success("Chat response generated successfully.")
 
         # Convert answer to speech and save
         tts = LMNTtts(api_key=os.getenv("LMNT_API_KEY"))
@@ -160,7 +170,7 @@ async def chat_with_context(question):
         return mp3_file_path  # Return the MP3 file path
 
     except Exception as e:
-        logger.error(f"❌ Chat processing error: {e}")
+        logger.error(f"Chat processing error: {e}")
         raise ValueError(f"Error processing chat request: {str(e)}")
 
 
